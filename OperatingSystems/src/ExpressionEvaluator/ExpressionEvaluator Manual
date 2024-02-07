@@ -1,0 +1,33 @@
+=================================================================
+|					ExpressionEvaluator Manual					|
+|						by Dante Anzalone						|
+|																|
+| 		The EvaluateExpression class is a program that takes 	|
+|	an expression given by the user and with accordance to		|
+| 	order of precedence, prints out the operations formatted 	|
+|	like a tree data structure, but utilizing stacks. The 		|
+|	program will also print out the correct solution of the 	|
+|	expression. This program is for simple operations only, 	|
+|	such as multiplication, division, addition, and subtraction,|
+|	expressions provided by the user must be in InFlix form 	|
+|	((e.g. 5 + 2 / 10 + 3), and	the expression must contain 	|
+|	single-digit values (e.g. no greater than 9)				|
+|																|
+|		The Evaluator class is responsible for running the		|
+|	EvaluateExpression class.									|
+|																|
+|		One running the Evaluator class, the user will be 		|
+|	prompted to input an expression. The user must follow		|
+|	the following rules:										|
+|																|
+|		1. Simple operations only (*, /, +, and -)				|
+|		2. Must be in InFlix Expression form (e.g. 2 / 10 + 3)	|
+|		3. Deals with single digit numbers 						|
+|		(e.g. Don't do any value no greater than 9)				|
+| 																|
+|		Note: The user has to follow the above rules for the	|
+|	program to work as intended. Future upgrades could include	|
+|	proper formatting of expressions and solutions in a tree	|
+|	form along with the ability to have more complex operations	|
+|	(e.g. ^, (), etc) and values greater than 9. 				|
+=================================================================
