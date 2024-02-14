@@ -8,9 +8,8 @@
 |	The program will also print out the correct solution of the |
 |	expression. This program is for simple operations only, 	|
 |	such as multiplication, division, addition, and subtraction,|
-|	expressions provided by the user must be in InFlix form 	|
-|	((e.g. 5 + 2 / 10 + 3), and	the expression must contain 	|
-|	single-digit values (e.g. no greater than 9)				|
+|	and the expressions provided by the user must be in Infix 	|
+|	form ((e.g. 5 + 2 / 10 + 3).								|
 |																|
 |		The Evaluator class is responsible for running the		|
 |	EvaluateExpression class.									|
@@ -20,7 +19,7 @@
 |	the following rules:										|
 |																|
 |		1. Simple operations only (*, /, +, and -)				|
-|		2. Must be in InFlix Expression form (e.g. 2 / 10 + 3)	|
+|		2. Must be in Infix Expression form (e.g. 2 / 10 + 3)	|
 |																|
 |		Note: The user has to follow the above rules for the	|
 |	program to work as intended. Future upgrades could include	|
