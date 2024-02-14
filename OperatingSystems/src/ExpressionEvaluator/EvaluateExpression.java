@@ -6,7 +6,7 @@ import java.util.Stack;
  * EvaluateExpression - A Class that takes an expression given by the user and with 
  * accordance to order of precedence, prints out the operation step-by-step. The program will also print 
  * out the correct solution of the expression. This program is for simple operations only, such as 
- * multiplication, division, addition, and subtraction, and expressions provided by the user must be in InFlix 
+ * multiplication, division, addition, and subtraction, and expressions provided by the user must be in Infix 
  * form ((e.g. 5 + 2 / 10 + 3).
  * @author Dante Anzalone
  * @version 2023-09 (4.29.0)
@@ -19,7 +19,7 @@ public class EvaluateExpression
 	private String equation, unseperated;
 	private Stack <Double> values;
 	private ArrayList <String> postfix;
-	private ArrayList <String> equationsWithAnswer; // For the Tree Formatting 
+	private ArrayList <String> equationsWithAnswer;
 	
 	/**
 	 * EvaluateExpression Constructor
@@ -41,11 +41,11 @@ public class EvaluateExpression
 		Double result; 
 		
 		equation = userPrompt(); 		// Obtains the expression via prompting user for input
-		postFixConversion(equation);	// Converts InFix Expression to PostFix --> Computer's way of reading expressions
-		result = evaluation();			// Finally evaluates the expression
+		postFixConversion(equation);	// Converts Infix Expression to PostFix --> Computer's way of reading expressions
+		result = evaluation();			// Evaluates the expression
 		
 		System.out.printf("%n=============================================================================%n"
-				+ "%nPostFix Expression: %s%n", postfix);
+				+ "%nPostFix ArrayList: %s%n", postfix);
 		System.out.printf("%nAnswer: %s%n"
 				+ "%n=============================================================================%n", result);
 		
@@ -61,23 +61,128 @@ public class EvaluateExpression
 	public String userPrompt ()
 	{
 		String equation;
+		boolean run;
+		
+		equation = "";
+		run = true;
 		Scanner scan;
 		
 		scan = new Scanner (System.in);
-		System.out.printf("%nEvaluationExpression Program by Dante Anzalone%n%n=============================================================================%n"
-				+ "%nBefore entering your expression, make sure to follow the Program's Rules:%n"
-				+ "%n1. Simple operations only (*, /, +, and -)"
-				+ "%n2. Must be in Inflix Expression form (e.g. 5 + 2 / 10 + 3)"
-				+ "%n3. Deals with single digit numbers (e.g. Don't do any value no greater than 9)%n"
-				+ "%n=============================================================================%n");
+		System.out.printf("%nEvaluationExpression Program by Dante Anzalone%n%n=============================================================================%n");
 		
-		System.out.printf("%nInput an equation to solve: ");
-		equation = scan.nextLine();
-		unseperated = equation;
-		equation = equation.replace(" ", ""); // Ensures there is no white space
+		while (run == true)
+		{
+			System.out.printf("%nBefore entering your expression, make sure to follow the Program's Rules:%n"
+					+ "%n1. Simple operations only (*, /, +, and -)"
+					+ "%n2. Must be in Infix Expression form (e.g. 5 + 2 / 10 + 3)%n"
+					+ "%n=============================================================================%n");
+			
+			System.out.printf("%nInput an equation to solve: %n");
+			equation = scan.nextLine();
+			
+			unseperated = equation;
+			
+			if (isEquationValid(equation) == true)
+			{
+				equation = equation.replace(" ", ""); // Ensures there is no white space
+				scan.close();
+				run = false;
+			}
+			else
+			{
+				System.out.printf("%nREREAD THE RULES%n");
+			}
+		}
 		
 		scan.close();
 		return equation;
+	}
+	
+	/**
+	 * isEquationValid Method - Ensures that the equation is valid and in Infix expression 
+	 * Alters the postFixConversion method to check for spaces and invalidity 
+	 * @param equation - Equation given by the user
+	 * @return true if a valid Infix equation according to program specifications else false
+	 */
+	private boolean isEquationValid (String equation)
+	{
+		ArrayList <String> checkValid; // Normal Infix equation
+		boolean run;
+		String value;
+		char character;
+					
+		checkValid = new ArrayList <String> ();
+
+		for (int i = 0; i < equation.length(); i++) // Scanning the String from left to right
+		{
+			value = "";
+			character = equation.charAt(i); // Referenced, more efficient
+			run = true;
+
+			if (character == ' ') 
+			{
+				// Does nothing 
+			}
+			else if (character != '*' && character != '/' && character != '+' && character != '-') // If the character is an operand... (not an operation)
+			{
+				while (run == true) // Checking it a single digit or not
+				{
+					if (character != '*' && character != '/' && character != '+' && character != '-' && character != ' ')
+					{
+						value += "" + character;
+						i++; // Index moves up to check inside while loop to see if it is a digit > 9
+						
+						if (i < equation.length()) // Ensuring not out of bounds
+						{
+							character = equation.charAt(i); // Gets next value
+						}
+						else
+						{
+							run = false; // Out of bounds, end while loop
+						}
+					}
+					else // It was an operation
+					{
+						i--; // Since it was an operation, move index back down to reenter the main if statement (else it will skip operation)
+						run = false;
+					}
+				}
+				// ...put it in the checkValid ArrayList
+				checkValid.add(value);
+			}
+			else // If an operation was scanned
+			{
+				checkValid.add("" + character);
+			}
+		}
+		
+		// Now checking for validity 
+		
+		System.out.printf("%nInfix ArrayList: %s%n", checkValid);
+		
+		for (int i = 0; i < checkValid.size(); i++)
+		{
+			value = checkValid.get(i);
+			character = value.charAt(0);
+			
+			if (i % 2 == 0) // even
+			{
+				if (!(Character.isDigit(character)))
+				{
+					System.out.printf("%nWAS NOT IN INFIX FORM --> EXPECTED VALUE AT INDEX = %s, BUT FOUND | %s |%n", i, checkValid.get(i));
+					return false;
+				}
+			}
+			else // odd
+			{
+				if (character != '*' && character != '/' && character != '+' && character != '-')
+				{
+					System.out.printf("%nWAS NOT IN INFIX FORM%nEXPECTED VALID OPERATOR AT INDEX = %s, BUT FOUND | %s |%n", i, checkValid.get(i));
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -256,7 +361,7 @@ public class EvaluateExpression
 	 */
 	private void print ()
 	{
-		System.out.printf("Output of Expressions"
+		System.out.printf("Output of Expressions%n"
 				+ "%n%s", unseperated);
 		
 		for (int i = 0; i < equationsWithAnswer.size(); i++)
