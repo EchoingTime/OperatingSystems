@@ -76,9 +76,16 @@ public class EvaluateExpression
 					+ "%n1. Simple operations only (*, /, +, and -)"
 					+ "%n2. Must be in Infix Expression form (e.g. 5 + 2 / 10 + 3)%n"
 					+ "%n=============================================================================%n");
+			System.out.printf("%nType E to EXIT program %n"
+					+ "%n=============================================================================%n");
+			System.out.printf("%nInput an equation to solve: ");
 			
-			System.out.printf("%nInput an equation to solve: %n");
 			equation = scan.nextLine();
+			
+			if (equation.equals(("E")) || equation.equals("e"))
+			{
+				System.exit(0);
+			}
 			
 			unseperated = equation;
 			
