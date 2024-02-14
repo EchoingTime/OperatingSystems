@@ -21,12 +21,8 @@
 |																|
 |		1. Simple operations only (*, /, +, and -)				|
 |		2. Must be in InFlix Expression form (e.g. 2 / 10 + 3)	|
-|		3. Deals with single digit numbers 						|
-|		(e.g. Don't do any value no greater than 9)				|
-| 																|
+|																|
 |		Note: The user has to follow the above rules for the	|
 |	program to work as intended. Future upgrades could include	|
-|	proper formatting of expressions and solutions in a tree	|
-|	form along with the ability to have more complex operations	|
-|	(e.g. ^, (), etc) and values greater than 9. 				|
+|	more complex operations (e.g. ^, (), etc). 					|
 =================================================================

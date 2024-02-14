@@ -6,8 +6,8 @@ import java.util.Stack;
  * EvaluateExpression - A Class that takes an expression given by the user and with 
  * accordance to order of precedence, prints out the operation step-by-step. The program will also print 
  * out the correct solution of the expression. This program is for simple operations only, such as 
- * multiplication, division, addition, and subtraction, expressions provided by the user must be in InFlix 
- * form ((e.g. 5 + 2 / 10 + 3), and the expression must contain single-digit values (e.g. no greater than 9)
+ * multiplication, division, addition, and subtraction, and expressions provided by the user must be in InFlix 
+ * form ((e.g. 5 + 2 / 10 + 3).
  * @author Dante Anzalone
  * @version 2023-09 (4.29.0)
  * @references 
@@ -90,20 +90,43 @@ public class EvaluateExpression
 	public void postFixConversion (String equation)
 	{	
 		Stack <Character> operation;
+		boolean run;
 		String value;
 		char character;
-		
+			
 		operation = new Stack <Character> ();
 		
 		for (int i = 0; i < equation.length(); i++) // Scanning the String from left to right
 		{
 			value = "";
 			character = equation.charAt(i); // Referenced, more efficient
-			
+			run = true;
+
 			// If the character is an operand... (not an operation)
 			if (character != '*' && character != '/' && character != '+' && character != '-')
 			{
-				value += character;
+				while (run == true) // Checking it a single digit or not
+				{
+					if (character != '*' && character != '/' && character != '+' && character != '-')
+					{
+						value += "" + character;
+						i++; // Index moves up to check inside while loop to see if it is a digit > 9
+						
+						if (i < equation.length()) // Ensuring not out of bounds
+						{
+							character = equation.charAt(i); // Gets next value
+						}
+						else
+						{
+							run = false; // Out of bounds, end while loop
+						}
+					}
+					else // It was an operation
+					{
+						i--; // Since it was an operation, move index back down to reenter the main if statement (else it will skip operation)
+						run = false;
+					}
+				}
 				// ...put it in the PostFix expression
 				postfix.add(value);
 			}
