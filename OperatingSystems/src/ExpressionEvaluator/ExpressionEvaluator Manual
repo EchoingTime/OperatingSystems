@@ -4,9 +4,8 @@
 |																|
 | 		The EvaluateExpression class is a program that takes 	|
 |	an expression given by the user and with accordance to		|
-| 	order of precedence, prints out the operations formatted 	|
-|	like a tree data structure, but utilizing stacks. The 		|
-|	program will also print out the correct solution of the 	|
+| 	order of precedence, prints out the operations step-by-step.|
+|	The program will also print out the correct solution of the |
 |	expression. This program is for simple operations only, 	|
 |	such as multiplication, division, addition, and subtraction,|
 |	expressions provided by the user must be in InFlix form 	|
