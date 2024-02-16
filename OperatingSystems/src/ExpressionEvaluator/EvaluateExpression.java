@@ -364,16 +364,63 @@ public class EvaluateExpression
 	/**
 	 * printInTreeForm Method - Prints the user equation and the step-by-step process 
 	 * @param None
-	 * @return None
+	 * @return None 
 	 */
 	private void print ()
 	{
-		System.out.printf("Output of Expressions%n"
-				+ "%n%s", unseperated);
+		int operation, step;
+		operation = 0; step = 0;
+		
+		System.out.printf("%nExpression Output%n"
+				+ "%n%s%n", unseperated);
 		
 		for (int i = 0; i < equationsWithAnswer.size(); i++)
 		{
-				System.out.printf("%n%s", equationsWithAnswer.get(i));
+			step++;
+				if (i % 2 == 0) // even
+				{
+					System.out.printf("%nStep: %s : %s %n", step, equationsWithAnswer.get(i));
+					if (equationsWithAnswer.get(i).contains("+"))
+					{
+						System.out.printf(" [ADDITION OPERATION]");
+						operation = 1;
+					}
+					else if (equationsWithAnswer.get(i).contains("-"))
+					{
+						System.out.printf(" [SUBTRACTION OPERATION]");
+						operation = 2;
+					}
+					else if (equationsWithAnswer.get(i).contains("*"))
+					{
+						System.out.printf(" [MULTIPLICATION OPERATION]");
+						operation = 3;
+					}
+					else // equationsWithAnswer.get(i).contains("/")
+					{
+						System.out.printf(" [DIVISION OPERATION]");
+						operation = 4;
+					}
+				}
+				else
+				{
+					step--;
+					if (operation == 1)
+					{
+						System.out.printf("%nANSWER FOR ADDITION OPERATION = %s%n", equationsWithAnswer.get(i));
+					}
+					else if (operation == 2)
+					{
+						System.out.printf("%nANSWER FOR SUBTRACTION OPERATION = %s%n", equationsWithAnswer.get(i));
+					}
+					else if (operation == 3)
+					{
+						System.out.printf("%nANSWER FOR MULTIPLICATION OPERATION = %s%n", equationsWithAnswer.get(i));
+					}
+					else // operation == 4
+					{
+						System.out.printf("%nANSWER FOR DIVISION OPERATION = %s%n", equationsWithAnswer.get(i));
+					}
+				}
 		}
 		System.out.printf("%n=============================================================================%n");
 	}
